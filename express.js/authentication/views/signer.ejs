@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signing Wallet</title>
+    <script
+      src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+      type="application/javascript"
+    ></script>
+    <script type="module">
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+      // BASIC RPC METHODS
+
+      // connect to meta mask
+
+      await provider.send("eth_requestAccounts", []);
+
+
+      const signers = provider.getSigner();
+
+
+      // SIGN MESSAGES
+
+      const timestamp = Date.now().toString()
+
+      console.log(timestamp)
+
+      console.log({
+        timestamp,
+        signature: await signers.signMessage(timestamp),
+        address: await signers.getAddress()
+      })
+
+    </script>
+  </head>
+  <body></body>
+</html>
